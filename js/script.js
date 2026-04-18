@@ -1,35 +1,35 @@
-const orb = document.getElementById("orb");
+const tapZone = document.getElementById("tap-zone");
 const voiceText = document.getElementById("voice-text");
 
-// CLICK ORB
-orb?.addEventListener("click", () => {
-  navigate("categories.html");
+// TAP
+tapZone.addEventListener("click", () => {
+  navigate();
 });
 
-// SWIPE
+// SWIPE RIGHT → LEFT
 let startX = 0;
 
-document.addEventListener("touchstart", e => {
+document.addEventListener("touchstart", (e) => {
   startX = e.touches[0].clientX;
 });
 
-document.addEventListener("touchend", e => {
+document.addEventListener("touchend", (e) => {
   let endX = e.changedTouches[0].clientX;
 
   if (startX - endX > 80) {
-    navigate("categories.html");
+    navigate();
   }
 });
 
-// NAVIGATION WITH FADE
-function navigate(page) {
+// NAVIGATION
+function navigate() {
   document.body.style.opacity = "0";
   setTimeout(() => {
-    window.location.href = page;
+    window.location.href = "categories.html";
   }, 300);
 }
 
-// VOICE SYSTEM
+// VOICE
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
 if (SpeechRecognition) {
@@ -41,21 +41,8 @@ if (SpeechRecognition) {
 
     voiceText.innerText = speech;
 
-    if (speech.includes("open categories")) {
-      navigate("categories.html");
-    }
-
-    if (speech.includes("back")) {
-      window.history.back();
-    }
-
-    // CATEGORY VOICE NAV
-    if (typeof categories !== "undefined") {
-      categories.forEach(cat => {
-        if (speech.includes(cat.name.toLowerCase())) {
-          navigate(`products.html?cat=${cat.id}`);
-        }
-      });
+    if (speech.includes("open") || speech.includes("enter")) {
+      navigate();
     }
   };
 
