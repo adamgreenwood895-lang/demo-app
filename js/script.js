@@ -35,3 +35,15 @@ if (SpeechRecognition) {
 
   recognition.start();
 }
+if (window.location.pathname.includes("categories.html")) {
+
+  recognition.onresult = (event) => {
+    let speech = event.results[event.results.length - 1][0].transcript.toLowerCase();
+
+    categories.forEach(cat => {
+      if (speech.includes(cat.name.toLowerCase())) {
+        window.location.href = `products.html?cat=${cat.id}`;
+      }
+    });
+  };
+}
