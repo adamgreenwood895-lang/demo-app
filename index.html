@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Demo App</title>
+<title>SONIX DEMO</title>
 <link rel="stylesheet" href="css/style.css">
 </head>
 
@@ -14,11 +14,22 @@
   <!-- Background -->
   <img src="assets/bg.jpg" class="bg">
 
+  <!-- Dark Overlay -->
+  <div class="overlay"></div>
+
+  <!-- ORB -->
+  <div class="orb-container">
+    <div class="orb" id="orb"></div>
+  </div>
+
   <!-- Invisible Tap Zone -->
   <div id="tap-zone"></div>
 
-  <!-- Voice Status -->
-  <div id="voice-status">Tap or say "open categories"</div>
+  <!-- Voice Feedback -->
+  <div id="voice-ui">
+    <div class="pulse"></div>
+    <p id="voice-text">Say "open categories"</p>
+  </div>
 
 </div>
 
