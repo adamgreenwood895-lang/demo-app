@@ -1,1 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="css/style.css">
+</head>
 
+<body>
+
+<div class="grid" id="category-grid"></div>
+
+<script src="data/data.js"></script>
+<script src="js/script.js"></script>
+
+<script>
+const grid = document.getElementById("category-grid");
+
+categories.forEach(cat => {
+  let div = document.createElement("div");
+  div.className = "card";
+  div.innerHTML = `
+    <img src="${cat.image}">
+    <h3>${cat.name}</h3>
+  `;
+
+  div.onclick = () => {
+    window.location.href = `products.html?cat=${cat.id}`;
+  };
+
+  grid.appendChild(div);
+});
+</script>
+
+</body>
+</html>
