@@ -1,10 +1,4 @@
-<!DOCTYPE html>
-<html>
-<head>
-<link rel="stylesheet" href="css/style.css">
-</head>
-
-<body>
+<body class="page fade-in">
 
 <div class="grid" id="category-grid"></div>
 
@@ -17,18 +11,16 @@ const grid = document.getElementById("category-grid");
 categories.forEach(cat => {
   let div = document.createElement("div");
   div.className = "card";
+
   div.innerHTML = `
     <img src="${cat.image}">
     <h3>${cat.name}</h3>
   `;
 
-  div.onclick = () => {
-    window.location.href = `products.html?cat=${cat.id}`;
-  };
+  div.onclick = () => navigate(`products.html?cat=${cat.id}`);
 
   grid.appendChild(div);
 });
 </script>
 
 </body>
-</html>
