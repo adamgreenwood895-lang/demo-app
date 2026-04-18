@@ -1,1 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link rel="stylesheet" href="css/style.css">
+</head>
 
+<body>
+
+<div class="grid" id="product-grid"></div>
+
+<script src="data/data.js"></script>
+
+<script>
+const params = new URLSearchParams(window.location.search);
+const cat = params.get("cat");
+
+const grid = document.getElementById("product-grid");
+
+products[cat].forEach(p => {
+  let div = document.createElement("div");
+  div.className = "card";
+
+  div.innerHTML = `
+    <img src="${p.image}">
+    <h3>${p.name}</h3>
+  `;
+
+  grid.appendChild(div);
+});
+</script>
+
+</body>
+</html>
