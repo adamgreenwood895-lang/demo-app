@@ -1,12 +1,17 @@
+// ELEMENTS
 const tapZone = document.getElementById("tap-zone");
 const voiceText = document.getElementById("voice-text");
 
-// TAP
-tapZone.addEventListener("click", () => {
-  navigate();
-});
+// ==========================
+// TAP INTERACTION
+// ==========================
+if (tapZone) {
+  tapZone.addEventListener("click", () => triggerEnter());
+}
 
-// SWIPE RIGHT → LEFT
+// ==========================
+// SWIPE DETECTION
+// ==========================
 let startX = 0;
 
 document.addEventListener("touchstart", (e) => {
@@ -17,34 +22,82 @@ document.addEventListener("touchend", (e) => {
   let endX = e.changedTouches[0].clientX;
 
   if (startX - endX > 80) {
-    navigate();
+    triggerEnter();
   }
 });
 
-// NAVIGATION
-function navigate() {
+// ==========================
+// ENTER TRANSITION
+// ==========================
+function triggerEnter() {
+
+  if (tapZone) {
+    tapZone.classList.add("enter-active");
+  }
+
   document.body.style.opacity = "0";
+
   setTimeout(() => {
     window.location.href = "categories.html";
-  }, 300);
+  }, 400);
 }
 
-// VOICE
+// ==========================
+// VOICE RECOGNITION
+// ==========================
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
 if (SpeechRecognition) {
+
   const recognition = new SpeechRecognition();
   recognition.continuous = true;
+  recognition.interimResults = true;
 
   recognition.onresult = (event) => {
     let speech = event.results[event.results.length - 1][0].transcript.toLowerCase();
 
-    voiceText.innerText = speech;
+    if (voiceText) {
+      voiceText.innerText = speech;
+    }
 
-    if (speech.includes("open") || speech.includes("enter")) {
-      navigate();
+    // ENTER COMMANDS
+    if (
+      speech.includes("open") ||
+      speech.includes("enter") ||
+      speech.includes("go")
+    ) {
+      triggerEnter();
+    }
+
+    // CATEGORY NAV (if on categories page)
+    if (typeof categories !== "undefined") {
+      categories.forEach(cat => {
+        if (speech.includes(cat.name.toLowerCase())) {
+          navigateTo(`products.html?cat=${cat.id}`);
+        }
+      });
+    }
+
+    // BACK COMMAND
+    if (speech.includes("back")) {
+      window.history.back();
     }
   };
 
+  recognition.onerror = () => {
+    console.log("Voice recognition error");
+  };
+
   recognition.start();
+}
+
+// ==========================
+// NAVIGATION HELPER
+// ==========================
+function navigateTo(url) {
+  document.body.style.opacity = "0";
+
+  setTimeout(() => {
+    window.location.href = url;
+  }, 300);
 }
