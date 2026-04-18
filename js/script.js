@@ -1,24 +1,35 @@
-// TAP ZONE CLICK
-document.getElementById("tap-zone")?.addEventListener("click", () => {
-  window.location.href = "categories.html";
+const orb = document.getElementById("orb");
+const voiceText = document.getElementById("voice-text");
+
+// CLICK ORB
+orb?.addEventListener("click", () => {
+  navigate("categories.html");
 });
 
-// SWIPE DETECTION
+// SWIPE
 let startX = 0;
 
-document.addEventListener("touchstart", (e) => {
+document.addEventListener("touchstart", e => {
   startX = e.touches[0].clientX;
 });
 
-document.addEventListener("touchend", (e) => {
+document.addEventListener("touchend", e => {
   let endX = e.changedTouches[0].clientX;
 
-  if (startX - endX > 100) {
-    window.location.href = "categories.html";
+  if (startX - endX > 80) {
+    navigate("categories.html");
   }
 });
 
-// VOICE RECOGNITION
+// NAVIGATION WITH FADE
+function navigate(page) {
+  document.body.style.opacity = "0";
+  setTimeout(() => {
+    window.location.href = page;
+  }, 300);
+}
+
+// VOICE SYSTEM
 const SpeechRecognition = window.SpeechRecognition || window.webkitSpeechRecognition;
 
 if (SpeechRecognition) {
@@ -26,24 +37,27 @@ if (SpeechRecognition) {
   recognition.continuous = true;
 
   recognition.onresult = (event) => {
-    let transcript = event.results[event.results.length - 1][0].transcript.toLowerCase();
+    let speech = event.results[event.results.length - 1][0].transcript.toLowerCase();
 
-    if (transcript.includes("open categories")) {
-      window.location.href = "categories.html";
+    voiceText.innerText = speech;
+
+    if (speech.includes("open categories")) {
+      navigate("categories.html");
+    }
+
+    if (speech.includes("back")) {
+      window.history.back();
+    }
+
+    // CATEGORY VOICE NAV
+    if (typeof categories !== "undefined") {
+      categories.forEach(cat => {
+        if (speech.includes(cat.name.toLowerCase())) {
+          navigate(`products.html?cat=${cat.id}`);
+        }
+      });
     }
   };
 
   recognition.start();
-}
-if (window.location.pathname.includes("categories.html")) {
-
-  recognition.onresult = (event) => {
-    let speech = event.results[event.results.length - 1][0].transcript.toLowerCase();
-
-    categories.forEach(cat => {
-      if (speech.includes(cat.name.toLowerCase())) {
-        window.location.href = `products.html?cat=${cat.id}`;
-      }
-    });
-  };
 }
