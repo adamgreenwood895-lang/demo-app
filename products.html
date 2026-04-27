@@ -35,6 +35,20 @@ products[cat].forEach(p => {
   grid.appendChild(div);
 });
 </script>
+<script>
+const container = document.getElementById("particles");
 
+if (container) {
+  for (let i = 0; i < 40; i++) {
+    let p = document.createElement("span");
+
+    p.style.left = Math.random() * 100 + "%";
+    p.style.animationDuration = (5 + Math.random() * 10) + "s";
+    p.style.opacity = Math.random();
+
+    container.appendChild(p);
+  }
+}
+</script>
 </body>
 </html>
