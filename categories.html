@@ -4,9 +4,16 @@
 <link rel="stylesheet" href="css/style.css">
 </head>
 
-<body class="page fade-in">
+<body class="cosmic-page fade-in">
 
-<div class="grid" id="category-grid"></div>
+<!-- BACKGROUND -->
+<img src="assets/cosmic.jpg" class="cosmic-bg">
+<div class="cosmic-overlay"></div>
+
+<!-- CONTENT -->
+<div class="content">
+  <div class="grid" id="category-grid"></div>
+</div>
 
 <script src="data/data.js"></script>
 <script src="js/script.js"></script>
@@ -23,9 +30,7 @@ categories.forEach(cat => {
     <h3>${cat.name}</h3>
   `;
 
-  div.onclick = () => {
-    window.location.href = `products.html?cat=${cat.id}`;
-  };
+  div.onclick = () => navigateTo(`products.html?cat=${cat.id}`);
 
   grid.appendChild(div);
 });
