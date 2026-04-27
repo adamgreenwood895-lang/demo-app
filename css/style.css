@@ -199,3 +199,77 @@ object-fit: cover; /* 🔥 THIS FIXES FULLSCREEN */
   border: none;
 }
 */
+/* =========================
+   BACKGROUND ANIMATION
+   ========================= */
+
+.cosmic-bg {
+  animation: slowDrift 40s ease-in-out infinite alternate;
+}
+
+@keyframes slowDrift {
+  0%   { transform: scale(1) translateY(0px); }
+  100% { transform: scale(1.1) translateY(-40px); }
+}
+
+/* =========================
+   FLOATING PARTICLES
+   ========================= */
+
+.particles {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.particles span {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  background: white;
+  opacity: 0.6;
+  border-radius: 50%;
+  animation: floatUp linear infinite;
+}
+
+@keyframes floatUp {
+  from {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(-10vh);
+    opacity: 1;
+  }
+}
+
+/* =========================
+   CARD ANIMATIONS
+   ========================= */
+
+.card {
+  opacity: 0;
+  transform: translateY(30px) scale(0.98);
+  animation: cardEnter 0.6s ease forwards;
+}
+
+@keyframes cardEnter {
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* STAGGER EFFECT */
+.card:nth-child(1) { animation-delay: 0.1s; }
+.card:nth-child(2) { animation-delay: 0.2s; }
+.card:nth-child(3) { animation-delay: 0.3s; }
+.card:nth-child(4) { animation-delay: 0.4s; }
+
+/* HOVER DEPTH */
+.card:hover {
+  transform: scale(1.06) translateY(-4px);
+  box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+}
