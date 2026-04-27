@@ -53,16 +53,18 @@ object-fit: cover; /* 🔥 THIS FIXES FULLSCREEN */
    TAP ZONE (EDIT THIS ONLY)
    ========================= */
 #tap-zone {
+  position: absolute;
 
   /* 🔧 POSITION (TUNE THESE) */
-  bottom: 90%;
-  left: 1%;
-  width: 10%;
-  height: 12%;
+  bottom: 65%;
+  left: 5%;
+  width: 35%;
+  height: 8%;
 
-  border-radius: 100px;
+  border-radius: 12px;
   overflow: hidden;
   cursor: pointer;
+
 
   /* 🔴 DEBUG MODE (TURN OFF LATER) */
   background: rgba(0, 255, 255, 0.18);
