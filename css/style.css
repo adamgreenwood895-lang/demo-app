@@ -133,20 +133,65 @@ object-fit: cover; /* 🔥 THIS FIXES FULLSCREEN */
   transition: 0.3s ease;
 }
 
-.card:hover {
-  transform: scale(1.05);
+/* =========================
+   COSMIC BACKGROUND PAGES
+   ========================= */
+
+.cosmic-page {
+  position: relative;
+  width: 100%;
+  height: 100vh;
+  overflow-y: auto;
 }
 
-.card img {
+/* BACKGROUND IMAGE */
+.cosmic-bg {
+  position: fixed;
+  top: 0;
+  left: 0;
   width: 100%;
-  display: block;
+  height: 100%;
+  object-fit: cover;
+  z-index: -2;
+}
+
+/* DARK OVERLAY FOR READABILITY */
+.cosmic-overlay {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    to bottom,
+    rgba(10,10,20,0.7),
+    rgba(10,10,20,0.9)
+  );
+  z-index: -1;
+}
+
+/* GRID CONTENT */
+.content {
+  padding: 20px;
+}
+
+/* GLASS CARDS (UPGRADED) */
+.card {
+  background: rgba(255,255,255,0.08);
+  backdrop-filter: blur(14px);
+  border-radius: 18px;
+  overflow: hidden;
+  color: white;
+  transition: 0.3s ease;
+}
+
+.card:hover {
+  transform: scale(1.05);
+  background: rgba(255,255,255,0.12);
 }
 
 .card h3 {
   padding: 12px;
   font-weight: 500;
 }
-
 /* OPTIONAL: TURN OFF DEBUG MODE QUICKLY */
 /*
 #tap-zone {
