@@ -56,12 +56,12 @@ object-fit: cover; /* 🔥 THIS FIXES FULLSCREEN */
   position: absolute;
 
   /* 🔧 POSITION (TUNE THESE) */
-  bottom: 28%;
-  left: 20%;
+  bottom: 42%;
+  left: 12%;
   width: 60%;
-  height: 8%;
+  height: 15%;
 
-  border-radius: 12px;
+  border-radius: 10px;
   overflow: hidden;
   cursor: pointer;
 
